@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+{% block content %}
+<div class="container">
+	<h1>Borrowed books</h1>
+	{% if bookinstance_list %}
+	<div class="list-group">
+		{% for bookinst in bookinstance_list %}
+		<a href="{% url 'book-detail' bookinst.book.pk %}">
+			<button type="button" class="list-group-item list-group-item-action">
+				<li class="{% if bookinst.is_overdue %}text-danger{% endif %}">
+					<span style="color:#0066cc;">{{bookinst.book.title}}</span> ({{ bookinst.due_back }})        
+				</li>
+			</button>
+		</a>
+		{% endfor %}
+	</div>
+	{% else %}
+	<p>There are no books borrowed.</p>
+	{% endif %}
+</div>
+{% endblock %}

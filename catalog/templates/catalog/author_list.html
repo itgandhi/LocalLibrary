@@ -1,0 +1,44 @@
+{% extends "base_generic.html" %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container">
+	<h1>Author List</h1>
+	<div class="row">
+		{% if author_list %}
+		<div class="list-group">
+			{% for author in author_list %}
+			<div class="col-xs-8">
+				<a href="{{ author.get_absolute_url }}">
+				<button type="button" class="list-group-item list-group-item-action">
+				<span style="color:#0066cc;">{{ author.first_name}}, {{ author.last_name}}</span> ({{author.date_of_birth}} - {% if author.date_of_death %}{{author.date_of_death}} {% endif %})
+				</button>
+				</a>
+			</div>
+			<div class="col-xs-4">
+				<table>
+					<tr>
+						<td>
+							<form action="{% url 'author_update' author.id %}">
+								<button class="btn btn-md btn-success" type="submit">Edit</button>
+							</form>
+						</td>
+						<td>
+							<form action="{% url 'author_delete' author.id %}">
+								<button class="btn btn-md btn-danger" type="submit">Delete</button>
+							</form>
+						</td>
+					</tr>
+				</table>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% else %}
+	<p>There are no books in the library.</p>
+	{% endif %}
+</div>
+{% else %}
+<!--<p>Please login to see this page.</p>-->
+<meta http-equiv="REFRESH" content="0;url={% url 'login' %}">
+{% endif %}       
+{% endblock %}

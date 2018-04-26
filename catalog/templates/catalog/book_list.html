@@ -1,0 +1,47 @@
+{% extends "base_generic.html" %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container">
+	<h1>Book List</h1>
+	<div class="row">
+		{% if book_list %}
+		<div class="list-group">
+			{% for book in book_list %}
+			<div class="col-xs-8">
+				<a href="{{ book.get_absolute_url }}">
+				<button type="button" class="list-group-item list-group-item-action">
+				<span style="color:#0066cc;">{{ book.title }}</span> ({{book.author}})
+				<span class="badge badge-primary badge-pill">
+				{{book.bookinstance_set.all.count}}
+				</span>
+				</button>  
+				</a>
+			</div>
+			<div class="col-xs-4">
+				<table>
+					<tr>
+						<td>
+							<form action="{% url 'book_update' book.id %}">
+								<button class="btn btn-md btn-success" type="submit">Edit</button>
+							</form>
+						</td>
+						<td>
+							<form action="{% url 'book_delete' book.id %}">
+								<button class="btn btn-md btn-danger" type="submit">Delete</button>
+							</form>
+						</td>
+					</tr>
+				</table>
+			</div>
+			{% endfor %}
+		</div>
+		{% else %}
+		<p>There are no books in the library.</p>
+		{% endif %}
+	</div>
+</div>
+{% else %}
+<!--<p>Please login to see this page.</p>-->
+<meta http-equiv="REFRESH" content="0;url={% url 'login' %}">
+{% endif %}
+{% endblock %}

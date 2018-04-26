@@ -1,0 +1,28 @@
+{% extends "base_generic.html" %}
+{% block content %}
+<div class="container">
+<div class="row">
+	<div class="col-sm-3,col-md-4, col-lg-4 ">
+	</div>
+	<div class="col-sm-6,col-md-4, col-lg-4 ">
+		<h1>Book Instance</h1>
+		<form action="" method="post">
+			{% csrf_token %}
+			<div class="form-group">
+				{{ form }}
+				<button class="buttonSubmit" type="submit">Submit</button>
+			</div>
+		</form>
+	</div>
+	<div class="col-sm-3,col-md-4, col-lg-4 ">
+	</div>
+</div>
+<script>
+	$(document).ready(function(){
+		$('#id_book').addClass('form-control')
+		$('#id_borrower').addClass('form-control')
+		$('#id_status').addClass('form-control')
+		$('.helptext').append('</br></br>')
+	});
+</script>
+{% endblock %}

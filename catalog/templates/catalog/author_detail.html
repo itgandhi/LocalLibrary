@@ -1,0 +1,43 @@
+{% extends "base_generic.html" %}
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container">
+	<h1>Author: {{ author}}</h1>
+	<p>{{author.date_of_birth}} - {% if author.date_of_death %}{{author.date_of_death}}{% endif %}</p>
+	<table>
+		<tr>
+			<td>
+				<form action="{% url 'author_update' author.id %}">
+					<button class="btn btn-md btn-success" type="submit">Edit</button>
+				</form>
+			</td>
+			<td>
+				<form action="{% url 'author_delete' author.id %}">
+					<button class="btn btn-md btn-danger" type="submit">Delete</button>
+				</form>
+			</td>
+		</tr>
+	</table>
+	<div style="margin-left:0px;margin-top:20px">
+		<h4>Books</h4>
+		<ul class="list-group">
+			{% for book in author.book_set.all %}
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+				<h4>
+				<a href="{% url 'book-detail' book.pk %}" >
+				{{book}}
+				</a>
+				<h4>
+				<p style="font-family:Arial;font-size:0.8em;font-weight:normal;font-style:normal;">
+					{{book.summary}}
+				</p>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+</div>
+{% else %}
+<!--<p>Please login to see this page.</p>-->
+<meta http-equiv="REFRESH" content="0;url={% url 'login' %}">
+{% endif %}   
+{% endblock %}

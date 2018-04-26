@@ -1,0 +1,21 @@
+{% extends "base_generic.html" %}
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-3 ">
+		</div>
+		<div class="col-md-6 ">
+			<h1>Renew: {{bookinst.book.title}}</h1>
+			<p>Borrower: {{bookinst.borrower}}</p>
+			<p{% if bookinst.is_overdue %} class="text-danger"{% endif %}>Due date: {{bookinst.due_back}}</p>
+			<form action="" method="post">
+				{% csrf_token %}
+				{{ form }}
+				<button class="buttonSubmit" type="submit">Submit</button>
+			</form>
+		</div>
+		<div class="col-md-3 ">
+		</div>
+	</div>
+</div>
+{% endblock %}
