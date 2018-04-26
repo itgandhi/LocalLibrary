@@ -23,8 +23,8 @@ What things you need to install the software and how to install them
 2. Setup postgresql
 	> setup credentials like this in application’s settings.py file
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+	'default': {
+	'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'your_database_name',
         'USER': 'user_name',
         'PASSWORD': 'password',
@@ -34,7 +34,9 @@ DATABASES = {
 }
 
 127.0.0.1:5432 is default host and port for postgresql. If you have changed Host and Port of your hosting database, you have to change here in settings.py file accordingly.	
+
 3. Run `python manage.py make migrations` to create table schema in the database.
+
 4. Run `python manage.py migrate` to apply changes in models.py.
 
 ## Built With
